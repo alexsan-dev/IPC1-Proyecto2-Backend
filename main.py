@@ -1,14 +1,18 @@
-# FLASH Y APP
+# FLASK
 from flask import Flask
+from flask_jsonschema_validator import JSONSchemaValidator
+
+# CONTROLADORES
+from controllers.user import user_controller
+
+# APP
 app = Flask(__name__)
 
-# RUTAS
+# JSON VALIDATION
+JSONSchemaValidator(app=app, root="models")
 
-
-@app.route('/')
-def hello_world():
-    return "Hello World"
-
+# CONTROLADORES
+user_controller(app)
 
 if __name__ == '__main__':
     app.run()
