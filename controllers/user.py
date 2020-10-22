@@ -36,3 +36,8 @@ class user_controller:
         def delete_user(username):
             # BORRAR USUARIOS
             return self.user_service.delete_data(username)
+
+        @app.route('/forgot/<username>', methods=['GET'])
+        def get_user_password(username):
+            # BORRAR USUARIOS
+            return self.user_service.get_password(username)

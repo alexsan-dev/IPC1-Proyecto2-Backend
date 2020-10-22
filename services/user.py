@@ -76,3 +76,13 @@ class user:
             return "Usuario eliminado."
         else:
             return "Usuario no encontrado."
+
+    def get_password(self, username):
+        # BUSCAR
+        tmpUser = self.find_user(username)
+
+        # REMPLAZAR
+        if tmpUser:
+            return tmpUser[0]["password"]
+        else:
+            return "Usuario no encontrado."
