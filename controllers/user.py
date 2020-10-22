@@ -5,6 +5,8 @@ from flask import Flask, jsonify, request
 from services.user import user
 
 # CONTROLADOR
+
+
 class user_controller:
     # CONSTRUCTOR
     def __init__(self, app):
@@ -21,5 +23,16 @@ class user_controller:
 
         @app.route('/user/<username>', methods=['GET'])
         def get_user(username):
-            # AGREGAR USUARIOS
+            # LEER USUARIOS
             return self.user_service.get_data(username)
+
+        @app.route('/user/<username>', methods=['PUT'])
+        @app.validate('user', 'data')
+        def put_user(username):
+            # ACTUALIZAR USUARIOS
+            return self.user_service.put_data(username, request.json)
+
+        @app.route('/user/<username>', methods=['DELETE'])
+        def delete_user(username):
+            # BORRAR USUARIOS
+            return self.user_service.delete_data(username)
