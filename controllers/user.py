@@ -1,5 +1,5 @@
 # IMPORTS
-from flask import Flask, jsonify, request
+from flask import request
 
 # SERVICIOS
 from services.user import user

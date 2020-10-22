@@ -1,7 +1,6 @@
 # IMPORTS
 from flask import jsonify
 import json
-import os
 
 # DATOS TEMPORALES
 users = []
@@ -10,14 +9,6 @@ users = []
 
 
 class user:
-    # CONSTRUCTOR
-    def __init__(self):
-        self.path = os.path.dirname(__file__)
-
-    # RUTA RELATIVA
-    def get_path(self, rel_path):
-        return os.path.join(self.path, rel_path)
-
     # BUSCADOR
     def find_user(self, username):
         # BUSCAR
@@ -34,9 +25,15 @@ class user:
 
     # GUARDAR DATOS
     def set_data(self, user):
+        # BUSCAR
+        tmpUser = self.find_user(user['user_name'])
+
         # ESCRIBIR DATOS JSON
-        users.append(user)
-        return "Usuario agregado exitosamente."
+        if tmpUser == None:
+            users.append(user)
+            return "Usuario agregado exitosamente."
+        else:
+            return "Este username ya esta registrado."
 
     # LEER DATOS
     def get_data(self, username):
@@ -56,8 +53,15 @@ class user:
 
         # REMPLAZAR
         if tmpUser:
-            users[tmpUser[1]] = user
-            return user
+            # BUSCAR
+            localUser = self.find_user(user['user_name'])
+
+            # REMPLAZAR
+            if localUser == None and user['user_name'] != username:
+                users[tmpUser[1]] = user
+                return user
+            else:
+                return "Usuario no actualizado."
         else:
             return "Usuario no encontrado."
 
