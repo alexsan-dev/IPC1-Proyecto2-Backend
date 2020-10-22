@@ -5,8 +5,6 @@ from flask import Flask, jsonify, request
 from services.user import user
 
 # CONTROLADOR
-
-
 class user_controller:
     # CONSTRUCTOR
     def __init__(self, app):
@@ -16,6 +14,12 @@ class user_controller:
     # RUTAS
     def set_routes(self, app):
         @app.route('/user', methods=['POST'])
-        @app.validate( 'user', 'data' )
+        @app.validate('user', 'data')
         def set_user():
+            # AGREGAR USUARIOS
             return self.user_service.set_data(request.json)
+
+        @app.route('/user/<username>', methods=['GET'])
+        def get_user(username):
+            # AGREGAR USUARIOS
+            return self.user_service.get_data(username)
