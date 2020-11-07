@@ -1,5 +1,6 @@
 # IMPORTS
 from flask import request
+from flask_cors import cross_origin
 
 # SERVICIOS
 from services.login import login
@@ -17,7 +18,9 @@ class login_controller:
     def set_routes(self, app):
         @app.route('/login', methods=['POST'])
         @app.validate('user', 'login')
+        @cross_origin()
         def login_user():
             # AGREGAR USUARIOS
             loginData = request.json
-            return self.login_service.login_user(loginData['user_name'], loginData['password'])
+            return self.login_service.login_user(loginData['user_name'],
+                                                 loginData['password'])
