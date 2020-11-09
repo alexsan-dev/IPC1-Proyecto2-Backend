@@ -1,11 +1,19 @@
 # IMPORTS
 from flask import jsonify
 import json
-
-# DATOS TEMPORALES
-users = []
+from services.errors import errors
 
 # CREAR USUARIO
+admin_user = {
+    "user_name": "admin",
+    "name": "Usuario",
+    "last_name": "Maestro",
+    "type": "admin",
+    "password": "admin"
+}
+
+# DATOS TEMPORALES
+users = [admin_user]
 
 
 class user:
@@ -31,9 +39,9 @@ class user:
         # ESCRIBIR DATOS JSON
         if tmpUser == None:
             users.append(user)
-            return "Usuario agregado exitosamente."
+            return "Gracias por registrarte tu usuario ha sido agregado exitosamente, puedes continuar a la tienda."
         else:
-            return "Este username ya esta registrado."
+            return errors[1]
 
     # LEER DATOS
     def get_data(self, username):
@@ -44,7 +52,7 @@ class user:
         if tmpUser:
             return jsonify(tmpUser[0])
         else:
-            return "Usuario no encontrado."
+            return jsonify({'error': errors[0]})
 
     # ACTUALIZAR DATOS
     def put_data(self, username, user):
@@ -61,11 +69,11 @@ class user:
                 users[tmpUser[1]] = user
                 return user
             else:
-                return "Usuario no actualizado."
+                return errors[1]
         else:
-            return "Usuario no encontrado."
+            return errors[0]
 
-     # BORRAR DATOS
+    # BORRAR DATOS
     def delete_data(self, username):
         # BUSCAR
         tmpUser = self.find_user(username)
@@ -73,9 +81,9 @@ class user:
         # REMPLAZAR
         if tmpUser:
             del users[tmpUser[1]]
-            return "Usuario eliminado."
+            return "La cuenta de este usuario se ha eliminado permanentemente."
         else:
-            return "Usuario no encontrado."
+            return errors[0]
 
     def get_password(self, username):
         # BUSCAR
@@ -83,6 +91,7 @@ class user:
 
         # REMPLAZAR
         if tmpUser:
-            return tmpUser[0]["password"]
+            return "Tu contraseña es: " + "\"" + tmpUser[0][
+                "password"] + "\"" + " no la olvides."
         else:
-            return "Usuario no encontrado."
+            return errors[0]

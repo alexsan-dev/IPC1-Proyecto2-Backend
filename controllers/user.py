@@ -44,5 +44,5 @@ class user_controller:
         @app.route('/forgot/<username>', methods=['GET'])
         @cross_origin()
         def get_user_password(username):
-            # BORRAR USUARIOS
+            # RECUPERAR USUARIO
             return self.user_service.get_password(username)

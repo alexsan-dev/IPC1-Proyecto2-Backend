@@ -1,5 +1,6 @@
 # IMPORTS
 from services.user import users
+from services.errors import errors
 
 # CREAR USUARIO
 
@@ -26,4 +27,6 @@ class login:
         tmpUser = self.find_user(username, password)
 
         # VALIDAR
-        return "Error" if tmpUser == None else "Ok"
+        return errors[
+            2] if tmpUser == None else "Bienvenido de nuevo " + tmpUser[0][
+                'name'] + ' es un gusto verte de nuevo.'
