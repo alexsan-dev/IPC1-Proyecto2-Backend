@@ -65,9 +65,9 @@ class user:
             localUser = self.find_user(user['user_name'])
 
             # REMPLAZAR
-            if localUser == None and user['user_name'] != username:
+            if localUser == None or user['user_name'] == username:
                 users[tmpUser[1]] = user
-                return user
+                return 'Usuario actualizado exitosamente, recarga la pagina para ver los nuevos datos.'
             else:
                 return errors[1]
         else:
