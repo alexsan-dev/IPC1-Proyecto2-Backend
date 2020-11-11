@@ -21,6 +21,6 @@ class login_controller:
         @cross_origin()
         def login_user():
             # AGREGAR USUARIOS
-            loginData = request.json
-            return self.login_service.login_user(loginData['user_name'],
-                                                 loginData['password'])
+            login_data = request.json
+            return self.login_service.login_user(login_data['user_name'],
+                                                 login_data['password'])

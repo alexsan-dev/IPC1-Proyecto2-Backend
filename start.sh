@@ -1,4 +1,4 @@
 . venv/bin/activate
 export FLASK_ENV=development
-export FLASK_APP=main.py
+export FLASK_APP=wsgi.py
 flask run

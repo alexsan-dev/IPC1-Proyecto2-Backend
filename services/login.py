@@ -24,9 +24,9 @@ class login:
     # RUTA RELATIVA
     def login_user(self, username, password):
         # BUSCAR
-        tmpUser = self.find_user(username, password)
+        temp_user = self.find_user(username, password)
 
         # VALIDAR
         return errors[
-            2] if tmpUser == None else "Bienvenido de nuevo " + tmpUser[0][
+            2] if temp_user == None else "Bienvenido de nuevo " + temp_user[0][
                 'name'] + ' es un gusto verte de nuevo.'

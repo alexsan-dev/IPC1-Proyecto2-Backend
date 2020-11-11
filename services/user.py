@@ -34,10 +34,10 @@ class user:
     # GUARDAR DATOS
     def set_data(self, user):
         # BUSCAR
-        tmpUser = self.find_user(user['user_name'])
+        temp_user = self.find_user(user['user_name'])
 
         # ESCRIBIR DATOS JSON
-        if tmpUser == None:
+        if temp_user == None:
             users.append(user)
             return "Gracias por registrarte tu usuario ha sido agregado exitosamente, puedes continuar a la tienda."
         else:
@@ -46,27 +46,27 @@ class user:
     # LEER DATOS
     def get_data(self, username):
         # BUSCAR
-        tmpUser = self.find_user(username)
+        temp_user = self.find_user(username)
 
         # OUTPUT
-        if tmpUser:
-            return jsonify(tmpUser[0])
+        if temp_user:
+            return jsonify(temp_user[0])
         else:
             return jsonify({'error': errors[0]})
 
     # ACTUALIZAR DATOS
     def put_data(self, username, user):
         # BUSCAR
-        tmpUser = self.find_user(username)
+        temp_user = self.find_user(username)
 
         # REMPLAZAR
-        if tmpUser:
+        if temp_user:
             # BUSCAR
-            localUser = self.find_user(user['user_name'])
+            local_user = self.find_user(user['user_name'])
 
             # REMPLAZAR
-            if localUser == None or user['user_name'] == username:
-                users[tmpUser[1]] = user
+            if local_user == None or user['user_name'] == username:
+                users[temp_user[1]] = user
                 return 'Usuario actualizado exitosamente, recarga la pagina para ver los nuevos datos.'
             else:
                 return errors[1]
@@ -76,22 +76,22 @@ class user:
     # BORRAR DATOS
     def delete_data(self, username):
         # BUSCAR
-        tmpUser = self.find_user(username)
+        temp_user = self.find_user(username)
 
         # REMPLAZAR
-        if tmpUser:
-            del users[tmpUser[1]]
+        if temp_user:
+            del users[temp_user[1]]
             return "La cuenta de este usuario se ha eliminado permanentemente."
         else:
             return errors[0]
 
     def get_password(self, username):
         # BUSCAR
-        tmpUser = self.find_user(username)
+        temp_user = self.find_user(username)
 
         # REMPLAZAR
-        if tmpUser:
-            return "Tu contraseña es: " + "\"" + tmpUser[0][
+        if temp_user:
+            return "Tu contraseña es: " + "\"" + temp_user[0][
                 "password"] + "\"" + " no la olvides."
         else:
             return errors[0]
